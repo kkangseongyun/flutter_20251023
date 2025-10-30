@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lab/screen/main/dto/DestinationDto.dart';
 import './widgets/DetailMainWidget.dart';
 import './widgets/DetailNewsWidget.dart';
 
@@ -28,6 +29,10 @@ class DetailScreenState extends State<DetailScreen> with SingleTickerProviderSta
 
   @override
   Widget build(BuildContext context) {
+    //화면전환시 전달된 데이터 획득...
+    Map<String, Object> args = ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
+    DestinationDto dto = args['destination'] as DestinationDto;
+
     return Scaffold(
       //NestedScrollView - 화면에 같이 나오는 하나의 위젯이 스크롤 될때 다른 위젯도 같이 스크롤 되게..
       //ListView에서 스크롤이 발생이 되면.. AppBar가 같이 스크롤 되게 하고 싶다..
@@ -46,7 +51,7 @@ class DetailScreenState extends State<DetailScreen> with SingleTickerProviderSta
                 pinned: true,
                 backgroundColor: Color(0xFF3899DD),
                 flexibleSpace: FlexibleSpaceBar(
-                  title: Text('스위스', style: TextStyle(color: Colors.white),),
+                  title: Text(dto.destination, style: TextStyle(color: Colors.white),),
                   titlePadding: EdgeInsets.only(left: 56, bottom: 16),
                   //앱바바 확장되었을 때 타이틀의 크기 배율 설정..
                   expandedTitleScale: 1.0,

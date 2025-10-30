@@ -94,7 +94,8 @@ class MainScreen extends StatelessWidget {
                   ),
                   ElevatedButton.icon(
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => EventScreen()));
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => EventScreen()));
+                      Navigator.pushNamed(context, '/event');
                     },
                     icon: Icon(Icons.arrow_drop_down, size: 20,),//flutter에서 제공되는 icon...
                     label: Text('전체 여행지 보기'),
