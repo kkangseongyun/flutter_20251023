@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab/screen/event/EventScreen.dart';
+import 'package:flutter_lab/screen/main/widgets/MainDrawer.dart';
 import 'package:flutter_lab/screen/myinfo/MyInfoScreen.dart';
 import './dto/DestinationDto.dart';
 import './widgets/DestinationCard.dart';
@@ -60,6 +61,7 @@ class MainScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('MainScreen'),
       ),
+      drawer: MainDrawer(),
       //화면에 여러 위젯을 나열하다가 화면을 벗어나게 되면..
       //노란색/검정색 패턴이 출력.. 경고다.. 화면 벗어났는데.. 스크롤 신경쓰지 않았다는..
       //SingleChildScrollView - 단일 위젯을 스크롤..
@@ -121,12 +123,12 @@ class MainScreen extends StatelessWidget {
               ),
             ),
 
-            ElevatedButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => MyInfoScreen()));
-                },
-                child: Text('Go MyInfo'),
-            )
+            // ElevatedButton(
+            //     onPressed: (){
+            //       Navigator.push(context, MaterialPageRoute(builder: (context) => MyInfoScreen()));
+            //     },
+            //     child: Text('Go MyInfo'),
+            // )
           ],
         ),
       )

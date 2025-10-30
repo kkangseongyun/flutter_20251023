@@ -54,6 +54,7 @@ class MyInfoScreenState extends State<MyInfoScreen> {
               Card(
                 elevation: 0,
                 shape: CircleBorder(),
+                // clipBehavior: Clip.antiAlias,
                 child: Container(
                   width: 150,
                   height: 150,
