@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lab/screen/detail/DetailScreen.dart';
 import '../dto/DestinationDto.dart';
 
 class DestinationCard extends StatelessWidget{
@@ -20,7 +21,7 @@ class DestinationCard extends StatelessWidget{
       //InkWell - 이벤트 제공.. 이벤트 발생시.. 잉크 번지는 듯한 UI 효과 제공..
       child: InkWell(
         onTap: (){
-
+          Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen()));
         },
         //이벤트 발생시.. 잉크 번지는 UI 효과가 어느 범위까지 나와야 하는가..
         //이 설정이 없으면.. card 밖에 까지.. 번지는 효과가 나올수 있다..
