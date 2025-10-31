@@ -1,5 +1,9 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_lab/provider/MyInfoModel.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class MyInfoScreen extends StatefulWidget {
@@ -23,6 +27,27 @@ class MyInfoScreenState extends State<MyInfoScreen> {
   //이 화면이 출력될때.. 초기데이터를 State에서 획득해서.. 그럴려면 controller 있어야 한다..
   late TextEditingController emailController;
   late TextEditingController phoneController;
+
+  //gallery 앱 연동..
+  Future<void> openGallery() async {
+    ImagePicker picker = ImagePicker();
+    //gallery 목록 화면을 띄우고.. 유저가 선택한 사진 정보를 받는다..
+    XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if(image != null){
+      Provider.of<MyInfoModel>(context, listen: false)
+          .saveMyInfo(userImage: image.path);//사진 경로를 앱 전역에 상태 데이터로 설정..
+    }
+  }
+
+  //camera 연동..
+  Future<void> openCamera() async {
+    ImagePicker picker = ImagePicker();
+    XFile? image = await picker.pickImage(source: ImageSource.camera);
+    if(image != null){
+      Provider.of<MyInfoModel>(context, listen: false)
+          .saveMyInfo(userImage: image.path);
+    }
+  }
 
   @override
   void initState() {
@@ -56,10 +81,16 @@ class MyInfoScreenState extends State<MyInfoScreen> {
     //유저 입력 정보 저장..
     print('email : ${emailController.text}, phone : ${phoneController.text}');
     //신규 데이터가 발생했다.. 상위 상태에 등록..
-    Provider.of<MyInfoModel>(context, listen: false).saveMyInfo(
+    final model = Provider.of<MyInfoModel>(context, listen: false);
+    model.saveMyInfo(
       email: emailController.text,
       phone: phoneController.text,
     );
+
+    //위에서 앱의 상태로 설정 했고..
+    //그 내용이 db 에 저장도 되어야 한다..
+    model.insertDB();
+
     Navigator.pop(context);
   }
   
@@ -103,13 +134,20 @@ class MyInfoScreenState extends State<MyInfoScreen> {
                     child: Container(
                       width: 150,
                       height: 150,
-                      child: Image.asset(model.userImage, fit: BoxFit.cover,),
+                      // child: Image.asset(model.userImage, fit: BoxFit.cover,),
+                      child: model.userImage.startsWith('assets/')
+                        ? Image.asset(model.userImage, fit: BoxFit.cover,)
+                        : Image.file(File(model.userImage), fit: BoxFit.cover),
                     ),
                   ),
                   SizedBox(height: 24,),
-                  ElevatedButton(onPressed: (){}, child: Text('Gallery App')),
+                  ElevatedButton(onPressed: (){
+                    openGallery();
+                  }, child: Text('Gallery App')),
                   SizedBox(height: 24,),
-                  ElevatedButton(onPressed: (){}, child: Text('Camera App')),
+                  ElevatedButton(onPressed: (){
+                    openCamera();
+                  }, child: Text('Camera App')),
                   SizedBox(height: 24,),
                   Form(
                     key: formKey,//key 를 설정하고 이 key 로 Form 의 State 획득..
