@@ -44,6 +44,11 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(Icons.home),
             title: Text('dio'),
             onTap: () => Navigator.pushNamed(context, '/dio'),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('provider'),
+            onTap: () => Navigator.pushNamed(context, '/provider'),
           )
         ],
       ),
