@@ -66,6 +66,11 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(Icons.home),
             title: Text('bloc'),
             onTap: () => Navigator.pushNamed(context, '/bloc'),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('platform'),
+            onTap: () => Navigator.pushNamed(context, '/platform'),
           )
         ],
       ),

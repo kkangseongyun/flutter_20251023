@@ -6,6 +6,7 @@ import 'package:flutter_lab/screen/dio/DioTestScreen.dart';
 import 'package:flutter_lab/screen/event/EventScreen.dart';
 import 'package:flutter_lab/screen/main/MainScreen.dart';
 import 'package:flutter_lab/screen/myinfo/MyInfoScreen.dart';
+import 'package:flutter_lab/screen/platform/PlatformScreen.dart';
 import 'package:flutter_lab/screen/provider/ProviderMainScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
           '/dio': (context) => DioTestScreen(),
           '/provider': (context) => ProviderMainScreen(),
           '/bloc': (context) => BlocMainScreen(),
+          '/platform': (context) => PlatformScreen(),
         },
         //라이팅 요청이 들어올때.. 개발자 코드가 실행되어야 하는 경우.. 조건에 따라 상이한 화면 전환이 필요하거나..
         //화면전환 전에 처리할 로직이 있거나..
